@@ -10,6 +10,7 @@
           |#[a(href="https://discord.gg/26uyN3y" target="_blank") Discord Community]
           v-btn(flat icon :color="ero_iine_color" @click="toggle_color")
             i.fas.fa-heart
+            p {{ ero_iine_num }}
 
       v-flex.mb-5(xs12 v-for="(content, key) in contents" :key="key")
         h2.headline.font-weight-bold.mb-3 {{ key }}
@@ -21,6 +22,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   import { Tweet } from 'vue-tweet-embed'
 
   export default {
@@ -29,6 +31,7 @@
           Tweet
       ],
       ero_iine_color: "grey",
+      ero_iine_num: 0,
       contents: {
         About: {
           text: [
@@ -43,8 +46,22 @@
     }),
     methods: {
       toggle_color() {
-        this.ero_iine_color == "pink" ? this.ero_iine_color = "grey" : this.ero_iine_color = "pink"
+        if(this.ero_iine_color == "pink") {
+          this.ero_iine_color = "grey"
+        } else {
+          this.ero_iine_color = "pink";
+          axios.post('https://script.google.com/macros/s/AKfycbwEf0jiuCUTOxCym_pEE2EFNQwtIXqoiWYCOsixyRPbnBSGvdLg/exec')
+            .then(function(response) {
+              this.ero_iine_num = response.data.iine_num;
+            }.bind(this))
+        }
       }
+    },
+    mounted() {
+      axios.get('https://script.google.com/macros/s/AKfycbwEf0jiuCUTOxCym_pEE2EFNQwtIXqoiWYCOsixyRPbnBSGvdLg/exec')
+        .then(function(response) {
+          this.ero_iine_num = response.data.iine_num;
+        }.bind(this))
     }
   }
 </script>
