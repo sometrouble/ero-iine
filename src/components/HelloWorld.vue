@@ -16,19 +16,17 @@
         h2.headline.font-weight-bold.mb-3 {{ key }}
         v-layout(justify-center v-for="(line, key, index) in content.text" :key="index")
           p {{ line }}
-        v-btn(outline :color="content.btn_color" large) {{ content.btn_text }}
-        //.
-          <iframe src="https://discordapp.com/widget?id=520133763037134888&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
+        v-btn(outline :color="content.btn_color" large :to="content.url") {{ content.btn_text }}
 </template>
 
 <script>
   import axios from 'axios'
-  import { Tweet } from 'vue-tweet-embed'
+  //import { Tweet } from 'vue-tweet-embed'
 
   export default {
     data: () => ({
       components: [
-          Tweet
+          //Tweet
       ],
       ero_iine_color: "grey",
       ero_iine_num: 0,
@@ -38,7 +36,7 @@
             "エロいいね研究会は初心者歓迎！",
             "誰でも簡単にエロいいねを始めることができます✨"
           ],
-          url: "",
+          url: "/about",
           btn_text: "learn more",
           btn_color: "indigo",
         }
