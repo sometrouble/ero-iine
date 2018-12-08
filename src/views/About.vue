@@ -20,7 +20,7 @@
               v-flex(xs2)
                 v-list-tile-sub-title(xs2) {{ record[0] }}
               v-flex(xs1)
-                v-list-title-action(xs1)
+                v-list-tile-action(xs1)
                   v-btn(icon ripple :href="record[3]")
                     i.fas.fa-link
         div(v-else)
@@ -32,23 +32,23 @@
           v-dialog(v-model="dialog" persistent max-width="600px")
             v-btn(slot="activator" color="primary" large style="width:150px;'") {{ content.btn_text }}
             v-card
-              v-form(ref="form")
+              v-form(ref="form" v-model="valid")
                 v-card-title
                   span.headline Registration
                 v-card-text
                   v-container(grid-list-md)
                     v-layout(wrap)
                       v-flex(xs12 sm6 md4)
-                        v-text-field(label="UserName*" required v-model="form.name")
+                        v-text-field(label="UserName*" required v-model="formdata.name" :rules="[v => !!v || 'required field']")
                       v-flex(xs12 sm6 md4)
-                        v-text-field(label="TwitterID*" required hint="@UserID" v-model="form.twitterID")
+                        v-text-field(label="TwitterID*" required hint="@UserID" v-model="formdata.twitterID" :rules="[v => !!v || 'required field']")
                       v-flex(xs12 sm6 md4)
-                        v-text-field(label="Password*" required type="password" v-model="form.password")
+                        v-text-field(label="Password*" required type="password" v-model="formdata.password" :rules="[v => !!v || 'required field']")
                   small *indicates required field
                 v-card-actions
                   v-spacer
                   v-btn(color="primary" flat @click="dialog=false") close
-                  v-btn(color="primary" @click="submit") submit
+                  v-btn(:disabled="!valid" color="primary" @click="submit") submit
         div(v-else)
           v-btn(v-if="content.btn_color!= ''" outline :color="content.btn_color" large :disabled="content.disabled" style="width:150px;" :href="content.url") {{ content.btn_text }}
         
@@ -73,9 +73,10 @@
         components: {
           'tweet-embed': Tweet,
         },
+        valid: true,
         alert: false,
         res_name: "",
-        form: {
+        formdata: {
           name: '',
           twitterID: '',
           password: ''
@@ -122,19 +123,17 @@
     },
     methods: {
       submit() {
-        if(this.$refs.form.validate()) {
-          axios.post('https://script.google.com/macros/s/AKfycby4Z5BXf9lIp79p0TwTWVM_0McGhusEDG8e45OzhcvF_ZWpdLS7/exec',
-            {
-              name: this.form.name,
-              twitterID: this.form.twitterID,
-              password: this.form.password
-            })
-            .then(function(response) {
-              this.dialog=false;
-              this.res_name = response.data.name;
-              this.alert=true;
-            }.bind(this))
-        }
+        let params = new URLSearchParams();
+        params.append('name', this.formdata.name);
+        params.append('twitterID', this.formdata.twitterID);
+        params.append('password', this.formdata.password);
+
+        axios.post('https://script.google.com/macros/s/AKfycby4Z5BXf9lIp79p0TwTWVM_0McGhusEDG8e45OzhcvF_ZWpdLS7/exec', params)
+          .then(function(response) {
+            this.dialog=false;
+            this.res_name = response.data.name[0];
+            this.alert=true;
+          }.bind(this))
       }
     },
     mounted() {
