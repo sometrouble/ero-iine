@@ -9,22 +9,78 @@
 
       v-flex.mt-5.mb-5(xs12 v-for="(content, key) in contents" :key="key")
         h2.headline.font-weight-bold.mb-3 {{ key }}
-        v-layout(v-if="content.text" justify-center v-for="(line, key, index) in content.text" :key="index")
-          p {{ line }}
-        v-layout(v-if="content.links" justify-center v-for="(line, key, index) in content.links" :key="index")
-          a.mb-3(:href="line[1]") {{ line[0] }}
-        v-btn(v-if="content.btn_color!= ''" outline :color="content.btn_color" large :disabled="content.disabled" style="width:150px;" :href="content.url") {{ content.btn_text }}
+        div(v-if="key == 'Research'")
+          v-list.mb-3(two-line subheader dense)
+            v-subheader(inset) Research papers
+            v-list-tile(v-for="(record, key, index) in content.data" :key="index")
+              v-flex(xs7)
+                v-list-tile-title(xs6) {{ record[2] }} 
+              v-flex(xs2)
+                v-list-tile-sub-title(xs3) {{ record[1] }}
+              v-flex(xs2)
+                v-list-tile-sub-title(xs2) {{ record[0] }}
+              v-flex(xs1)
+                v-list-title-action(xs1)
+                  v-btn(icon ripple :href="record[3]")
+                    i.fas.fa-link
+        div(v-else)
+          v-layout(v-if="content.text" justify-center v-for="(line, key, index) in content.text" :key="index")
+            p {{ line }}
+          v-layout(v-if="content.links" justify-center v-for="(line, key, index) in content.links" :key="index")
+            a.mb-3(:href="line[1]") {{ line[0] }}
+        div(v-if="key == 'Registration'")
+          v-dialog(v-model="dialog" persistent max-width="600px")
+            v-btn(slot="activator" color="primary" large style="width:150px;'") {{ content.btn_text }}
+            v-card
+              v-form(ref="form")
+                v-card-title
+                  span.headline Registration
+                v-card-text
+                  v-container(grid-list-md)
+                    v-layout(wrap)
+                      v-flex(xs12 sm6 md4)
+                        v-text-field(label="UserName*" required v-model="form.name")
+                      v-flex(xs12 sm6 md4)
+                        v-text-field(label="TwitterID*" required hint="@UserID" v-model="form.twitterID")
+                      v-flex(xs12 sm6 md4)
+                        v-text-field(label="Password*" required type="password" v-model="form.password")
+                  small *indicates required field
+                v-card-actions
+                  v-spacer
+                  v-btn(color="primary" flat @click="dialog=false") close
+                  v-btn(color="primary" @click="submit") submit
+        div(v-else)
+          v-btn(v-if="content.btn_color!= ''" outline :color="content.btn_color" large :disabled="content.disabled" style="width:150px;" :href="content.url") {{ content.btn_text }}
+        
+        v-dialog(v-model="alert" max-width="300")
+          v-card
+            v-card-title.caption Thanks!
+            v-card-text 
+              p Hello! {{ res_name }}. 
+              p Let's Ero-iine together!
+            v-card-actions
+              v-spacer
+              v-btn(@click="alert = false") done
 </template>
 
 <script>
-  //import axios from 'axios'
-  //import Tweet from 'vue-tweet-embed'
+  import axios from 'axios'
+  import Tweet from 'vue-tweet-embed/tweet'
 
   export default {
     data() {
       return {
         components: {
+          'tweet-embed': Tweet,
         },
+        alert: false,
+        res_name: "",
+        form: {
+          name: '',
+          twitterID: '',
+          password: ''
+        },
+        dialog: false,
         contents: {
           "What's Ero-iine?": {
             text: [
@@ -36,11 +92,7 @@
             disabled: false
           },
           "Research": {
-            links: [
-              ["2018-10-16 NYLON_1919: エロいいね危機（sexual faborite shock）" ,"https://himawarifurutani1919.hatenablog.com/entry/2018/10/16/021509"],
-              ["2018-08-16 NYLON_1919: エロいいねのやり方（発展編）", "https://himawarifurutani1919.hatenablog.com/entry/2018/08/16/024325"],
-              ["2018-08-14 NYLON_1919: エロいいねのやり方", "https://himawarifurutani1919.hatenablog.com/entry/2018/08/14/003441"]
-            ],
+            data: "",
             url: "https://himawarifurutani1919.hatenablog.com/",
             btn_text: "learn more",
             btn_color: "pink",
@@ -57,7 +109,8 @@
           },
           "Registration": {
             text: [
-              "現在, 登録の受付を行っておりません。"
+              "新規登録受付中です。(Beta)",
+              "エロいいね研究会はあなたのエロいいねをお待ちしております。"
             ],
             url: "",
             btn_text: "register",
@@ -68,8 +121,27 @@
       }
     },
     methods: {
+      submit() {
+        if(this.$refs.form.validate()) {
+          axios.post('https://script.google.com/macros/s/AKfycby4Z5BXf9lIp79p0TwTWVM_0McGhusEDG8e45OzhcvF_ZWpdLS7/exec',
+            {
+              name: this.form.name,
+              twitterID: this.form.twitterID,
+              password: this.form.password
+            })
+            .then(function(response) {
+              this.dialog=false;
+              this.res_name = response.data.name;
+              this.alert=true;
+            }.bind(this))
+        }
+      }
     },
     mounted() {
+      axios.get('https://script.google.com/macros/s/AKfycbxWF7h-K_PyLgu8ez24dITK7AK39tj0wpYUoSiJUaah6GYx9CYl/exec')
+        .then(function(response) {
+          this.contents.Research.data = response.data.data;
+        }.bind(this));
     }
   }
 </script>

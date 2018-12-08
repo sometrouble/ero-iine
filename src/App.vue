@@ -1,10 +1,10 @@
 <template lang="pug">
   v-app
-    v-navigation-drawer(v-model="drawer" fixed app)
+    v-navigation-drawer(v-model="drawer" absolute temporary)
       v-list
-        v-list-tile(value="true" v-for="(item, i) in items" :key="i")
+        v-list-tile(v-for="(item, i) in items" :key="i" :href="item.url")
           v-list-tile-action
-            v-icon(v-html="item.icon")
+            v-icon(v-html="item.icon" small)
           v-list-tile-content
             v-list-tile-title(v-text="item.title")
 
@@ -21,12 +21,18 @@
 </template>
 
 <script>
-
 export default {
   name: 'App',
   data () {
     return {
-      drawer: "",
+      drawer: false,
+      items: [
+        {
+          icon: "fas fa-home",
+          title: "Top",
+          url: "/"
+        },
+      ],
     }
   }
 }
