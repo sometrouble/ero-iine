@@ -30,7 +30,7 @@ export default {
         {
           icon: "fas fa-home",
           title: "Top",
-          url: "/"
+          url: "/ero-iine/"
         },
       ],
     }
