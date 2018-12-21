@@ -18,6 +18,14 @@ export default new Router({
         function () { 
           return import('./views/About.vue')
         }
+    },
+    {
+      path: '/gallery',
+      name: 'gallery',
+      component:
+        function () { 
+          return import('./views/Gallery.vue')
+        }
     }
   ]
 })

@@ -65,13 +65,11 @@
 
 <script>
   import axios from 'axios'
-  import Tweet from 'vue-tweet-embed/tweet'
 
   export default {
     data() {
       return {
         components: {
-          'tweet-embed': Tweet,
         },
         valid: true,
         alert: false,
