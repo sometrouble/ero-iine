@@ -4,19 +4,19 @@
       v-flex(xs12)
         v-img.mb-3(:src="require('../assets/images/ero-iine(large).png')" contain height="5vh")
         hr
-      v-flex(v-for="(i, index) in [0,0,0,0]" :key="index" xs3)
-        div(style="background-color: red;")
-          twitter
-              <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Sunsets don&#39;t get much better than this one over <a href="https://twitter.com/GrandTetonNPS?ref_src=twsrc%5Etfw">@GrandTetonNPS</a>. <a href="https://twitter.com/hashtag/nature?src=hash&amp;ref_src=twsrc%5Etfw">#nature</a> <a href="https://twitter.com/hashtag/sunset?src=hash&amp;ref_src=twsrc%5Etfw">#sunset</a> <a href="http://t.co/YuKy2rcjyU">pic.twitter.com/YuKy2rcjyU</a></p>&mdash; US Department of the Interior (@Interior) <a href="https://twitter.com/Interior/status/463440424141459456?ref_src=twsrc%5Etfw">May 5, 2014</a></blockquote>
+      v-flex(v-for="(item, index) in eroiine" :key="index" md3)
+        blockquote.twitter-tweet 
+          a(:href="item[0][0]")
+
 </template>
 
 <script>
-  import twitter from 'vue-twitter/lib/twttr.js'
+  import axios from 'axios'
   export default {
     data() {
       return {
+        eroiine: [],
         components: {
-          twitter
         },
       }
     },
@@ -25,6 +25,10 @@
       },
     },
     mounted() {
+      axios.get('https://script.google.com/macros/s/AKfycbxaaMlZxtrSBDJNxFwv6TJbhV32U7pa39p_4sjjRhS69HHXKFPu/exec')
+        .then(function(response) {
+          this.eroiine = response.data.data;
+        }.bind(this));
     }
   }
 </script>
