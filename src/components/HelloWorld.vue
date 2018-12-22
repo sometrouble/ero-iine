@@ -21,13 +21,9 @@
 
 <script>
   import axios from 'axios'
-  //import { Tweet } from 'vue-tweet-embed'
 
   export default {
     data: () => ({
-      components: [
-          //Tweet
-      ],
       ero_iine_color: "grey",
       ero_iine_num: 0,
       contents: {

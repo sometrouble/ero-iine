@@ -13,8 +13,8 @@
       div(style="width: 150px")
         v-img(:src="require('./assets/images/ero-iine.png')" contain height="60%")
       v-spacer
-      v-btn(flat href="https://twitter.com/NYLON_1919/likes" target="_blank")
-        span.mr-2 latest Ero-iine
+      v-btn(flat href="/gallery/" target="_blank")
+        span.mr-2 latest Ero-iine(Beta)
         v-icon fas fa-external-link-alt
     v-content
       router-view
