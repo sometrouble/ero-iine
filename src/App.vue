@@ -18,6 +18,8 @@
         v-icon fas fa-external-link-alt
     v-content
       router-view
+    v-footer.ml-3
+      p.caption.grey--text version: {{ version }}
 </template>
 
 <script>
@@ -26,6 +28,7 @@ export default {
   data () {
     return {
       drawer: false,
+      version: "0.0.3-alpha",
       items: [
         {
           icon: "fas fa-home",
