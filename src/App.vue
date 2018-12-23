@@ -13,7 +13,7 @@
       div(style="width: 150px")
         v-img(:src="require('./assets/images/ero-iine.png')" contain height="60%")
       v-spacer
-      v-btn(flat to="gallery" target="_blank")
+      v-btn(flat to="gallery")
         span.mr-2 latest Ero-iine(Beta)
         v-icon fas fa-external-link-alt
     v-content
