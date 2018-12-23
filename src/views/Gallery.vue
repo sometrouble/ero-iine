@@ -3,6 +3,8 @@
     v-layout.mt-5(text-xs-center wrap)
       v-flex(xs12)
         v-img.mb-3(:src="require('../assets/images/ero-iine(large).png')" contain height="5vh")
+      v-flex(xs12)
+        v-btn(outline @click="reload_widget") reload
         hr
       v-flex(v-for="(i, index) in eroiine.reverse().slice(1,10)" :key="index" xs4)
         v-card(style="height: 100%;")
@@ -11,7 +13,6 @@
           v-chip(small color="primary" close label outline) 
             v-icon(left) label
             |ero-iine
-      v-btn(@click="submit")
 </template>
 
 <script>
@@ -25,20 +26,18 @@
       }
     },
     methods: {
-      async submit() {
-        await axios.get('https://script.google.com/macros/s/AKfycbxaaMlZxtrSBDJNxFwv6TJbhV32U7pa39p_4sjjRhS69HHXKFPu/exec')
+      reload_widget() {
+        window.twttr.widgets.load();
+      },
+      update_eroiine() {
+        axios.get('https://script.google.com/macros/s/AKfycbxaaMlZxtrSBDJNxFwv6TJbhV32U7pa39p_4sjjRhS69HHXKFPu/exec')
           .then((response) => {
             this.eroiine = response.data.data;
           });
-        window.twttr.widgets.load();
-      },
+      }
     },
-    //mounted: async function() {
-    //  await axios.get('https://script.google.com/macros/s/AKfycbxaaMlZxtrSBDJNxFwv6TJbhV32U7pa39p_4sjjRhS69HHXKFPu/exec')
-    //    .then((response) => {
-    //      this.eroiine = response.data.data;
-    //    });
-    //  await window.twttr.widgets.load();
-    //}
+    mounted() {
+      this.update_eroiine();
+    }
   }
 </script>
