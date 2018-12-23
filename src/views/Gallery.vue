@@ -28,7 +28,7 @@
       },
     },
     async mounted() {
-      await axios.get('https://script.google.com/macros/s/AKfycbxaaMlZxtrSBDJNxFwv6TJbhV32U7pa39p_4sjjRhS69HHXKFPu/exec')
+      let response = await axios.get('https://script.google.com/macros/s/AKfycbxaaMlZxtrSBDJNxFwv6TJbhV32U7pa39p_4sjjRhS69HHXKFPu/exec')
         .then((response) => {
           this.eroiine = response.data.data;
         });
