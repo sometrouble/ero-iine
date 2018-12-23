@@ -11,6 +11,7 @@
           v-chip(small color="primary" close label outline) 
             v-icon(left) label
             |ero-iine
+      v-btn(@click="submit")
 </template>
 
 <script>
@@ -24,15 +25,20 @@
       }
     },
     methods: {
-      submit() {
+      async submit() {
+        await axios.get('https://script.google.com/macros/s/AKfycbxaaMlZxtrSBDJNxFwv6TJbhV32U7pa39p_4sjjRhS69HHXKFPu/exec')
+          .then((response) => {
+            this.eroiine = response.data.data;
+          });
+        window.twttr.widgets.load();
       },
     },
-    mounted: async function() {
-      await axios.get('https://script.google.com/macros/s/AKfycbxaaMlZxtrSBDJNxFwv6TJbhV32U7pa39p_4sjjRhS69HHXKFPu/exec')
-        .then((response) => {
-          this.eroiine = response.data.data;
-        });
-      await window.twttr.widgets.load();
-    }
+    //mounted: async function() {
+    //  await axios.get('https://script.google.com/macros/s/AKfycbxaaMlZxtrSBDJNxFwv6TJbhV32U7pa39p_4sjjRhS69HHXKFPu/exec')
+    //    .then((response) => {
+    //      this.eroiine = response.data.data;
+    //    });
+    //  await window.twttr.widgets.load();
+    //}
   }
 </script>
