@@ -37,7 +37,7 @@
       }
     },
     mounted() {
-      this.update_eroiine();
+      //this.update_eroiine();
     }
   }
 </script>
