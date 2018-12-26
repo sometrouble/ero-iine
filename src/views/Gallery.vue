@@ -34,9 +34,11 @@
           });
       }
     },
-    async mounted() {
-      await this.update_eroiine();
-      await window.twttr.widgets.load();
+    mounted() {
+      async () => {
+        await this.update_eroiine();
+        await window.twttr.widgets.load();
+      }
     }
   }
 </script>
