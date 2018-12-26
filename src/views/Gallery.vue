@@ -39,7 +39,7 @@
     },
     async mounted() {
       await this.update_eroiine();
-      reload_widget();
+      this.reload_widget();
     }
   }
 </script>
