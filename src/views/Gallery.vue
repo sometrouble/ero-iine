@@ -6,7 +6,7 @@
       v-flex(xs12)
         v-btn(outline @click="reload_widget") reload
         hr
-      v-flex(v-for="(i, index) in eroiine.reverse().slice(1,10)" :key="index" xs4)
+      v-flex(v-if="eroiine != []" v-for="(i, index) in eroiine.reverse().slice(1,10)" :key="index" xs4)
         v-card(style="height: 100%;")
           blockquote.twitter-tweet
             a(:href="i[0]")
