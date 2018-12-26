@@ -4,7 +4,7 @@
       v-flex(xs12)
         v-img.mb-3(:src="require('../assets/images/ero-iine(large).png')" contain height="5vh")
       v-flex(xs12)
-        v-btn(v-if="eroiine.length>0" outline @click="window.twttr.widgets.load()" block) reload
+        v-btn(v-if="eroiine.length>0" outline @click="reload_update" block) reload
         hr
       v-flex(v-for="(i, index) in eroiine" :key="index" xs4)
         v-card(style="height: 100%;")
@@ -26,6 +26,9 @@
       }
     },
     methods: {
+      reload_eroiine() {
+        window.twttr.widgets.load();
+      },
       update_eroiine() {
         axios.get('https://script.google.com/macros/s/AKfycbxaaMlZxtrSBDJNxFwv6TJbhV32U7pa39p_4sjjRhS69HHXKFPu/exec')
           .then((response) => {
@@ -37,6 +40,7 @@
     async mounted() {
       await this.update_eroiine();
       window.twttr.widgets.load();
+      this.reload_eroiine();
     }
   }
 </script>
