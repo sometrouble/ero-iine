@@ -45,7 +45,7 @@ export default {
       let EUC = encodeURIComponent;
       let LINK = window.location.href;
       let message = "エロいいね研究会 - Sexual Favorite Research Society of Japan."
-      let hashtag = "エロいいね研究会, SFRS-jp"
+      let hashtag = "エロいいね研究会, SFRS_jp"
 
       let URL = `https://twitter.com/intent/tweet?text=${EUC(message)}&hashtags=${EUC(hashtag)}&url=${LINK}`
 
