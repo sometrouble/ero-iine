@@ -4,7 +4,7 @@
       v-flex(xs12)
         v-img.mb-3(:src="require('../assets/images/ero-iine(large).png')" contain height="5vh")
       v-flex(xs12)
-        //v-btn(outline @click="reload_widget") reload
+        v-btn(v-if="eroiine.length>0" outline @click="window.twttr.widgets.load()" block) reload
         hr
       v-flex(v-for="(i, index) in eroiine" :key="index" xs4)
         v-card(style="height: 100%;")
@@ -34,11 +34,9 @@
           });
       }
     },
-    mounted() {
-      (async function() {
-        await this.update_eroiine();
-        await window.twttr.widgets.load();
-      });
+    async mounted() {
+      await this.update_eroiine();
+      window.twttr.widgets.load();
     }
   }
 </script>
