@@ -28,7 +28,7 @@ export default {
   data () {
     return {
       drawer: false,
-      version: "0.0.3-alpha",
+      version: "0.0.3-beta",
       items: [
         {
           icon: "fas fa-home",
