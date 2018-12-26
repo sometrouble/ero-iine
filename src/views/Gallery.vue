@@ -35,10 +35,10 @@
       }
     },
     mounted() {
-      async () => {
+      (async function() {
         await this.update_eroiine();
         await window.twttr.widgets.load();
-      }
+      });
     }
   }
 </script>
