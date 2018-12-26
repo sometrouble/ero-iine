@@ -4,7 +4,7 @@
       v-flex(xs12)
         v-img.mb-3(:src="require('../assets/images/ero-iine(large).png')" contain height="5vh")
       v-flex(xs12)
-        v-btn(v-if="eroiine.length>0" outline @click="reload_update" block) reload
+        v-btn(v-if="eroiine.length>0" outline @click="reload_eroiine" block) reload
         hr
       v-flex(v-for="(i, index) in eroiine" :key="index" xs4)
         v-card(style="height: 100%;")
