@@ -36,7 +36,7 @@
     },
     async mounted() {
       await this.update_eroiine();
-      window.twttr.widgets.load();
+      await window.twttr.widgets.load();
     }
   }
 </script>
