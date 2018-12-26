@@ -26,9 +26,6 @@
       }
     },
     methods: {
-      reload_widget() {
-        window.twttr.widgets.load();
-      },
       update_eroiine() {
         axios.get('https://script.google.com/macros/s/AKfycbxaaMlZxtrSBDJNxFwv6TJbhV32U7pa39p_4sjjRhS69HHXKFPu/exec')
           .then((response) => {
@@ -39,7 +36,7 @@
     },
     async mounted() {
       await this.update_eroiine();
-      this.reload_widget();
+      window.twttr.widgets.load();
     }
   }
 </script>
