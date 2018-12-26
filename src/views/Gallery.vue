@@ -26,15 +26,15 @@
       }
     },
     methods: {
-      //reload_widget() {
-      //  window.twttr.widgets.load();
-      //},
-      //update_eroiine() {
-      //  axios.get('https://script.google.com/macros/s/AKfycbxaaMlZxtrSBDJNxFwv6TJbhV32U7pa39p_4sjjRhS69HHXKFPu/exec')
-      //    .then((response) => {
-      //      this.eroiine = response.data.data;
-      //    });
-      //}
+      reload_widget() {
+        window.twttr.widgets.load();
+      },
+      update_eroiine() {
+        axios.get('https://script.google.com/macros/s/AKfycbxaaMlZxtrSBDJNxFwv6TJbhV32U7pa39p_4sjjRhS69HHXKFPu/exec')
+          .then((response) => {
+            this.eroiine = response.data.data;
+          });
+      }
     },
     mounted() {
       //this.update_eroiine();

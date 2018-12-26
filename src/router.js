@@ -19,7 +19,7 @@ export default new Router({
       component: () => import('./views/About.vue')
     },
     {
-      path: '/gallery',
+      path: '/gallery_test',
       name: 'gallery',
       component: () => import('./views/Gallery.vue')
     }
