@@ -1,6 +1,6 @@
 <template lang="pug">
   v-app
-    v-navigation-drawer(v-model="drawer" absolute temporary)
+    v-navigation-drawer(v-model="drawer" fixed temporary)
       v-list
         v-list-tile(v-for="(item, i) in items" :key="i" :href="item.url")
           v-list-tile-action
@@ -36,6 +36,21 @@ export default {
           icon: "fas fa-home",
           title: "Top",
           url: "/ero-iine/"
+        },
+        {
+          icon: "fab fa-readme",
+          title: "About",
+          url: "/ero-iine/#/about"
+        },
+        {
+          icon: "fas fa-heart",
+          title: "Gallery",
+          url: "/ero-iine/#/gallery"
+        },
+        {
+          icon: "fas fa-address-book",
+          title: "Contact",
+          url: "/ero-iine/#/contact"
         },
       ],
     }

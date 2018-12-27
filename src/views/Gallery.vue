@@ -6,7 +6,7 @@
       v-flex(xs12)
         v-btn(v-if="eroiine.length>0" outline @click="reload_eroiine") reload
         hr
-      v-flex(v-for="(i, index) in eroiine" :key="index" lg4 md6 xs12 wrap)
+      v-flex(v-for="(i, index) in eroiine" :key="index" xl4 lg6 md6 xs12 wrap)
         v-card.ma-1(style="height: 100%;" color="pink lighten-4")
           v-layout(wrap)
             v-flex(lg6)
