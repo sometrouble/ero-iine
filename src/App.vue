@@ -19,9 +19,10 @@
       v-btn(small flat icon @click="tweet")
         v-icon fab fa-twitter
     v-content
+      p.caption.grey--text.ma-3 version: {{ version }}
       router-view
-    v-footer.ml-3
-      p.caption.grey--text version: {{ version }}
+    v-footer.justify-center
+      p.caption.mt-3 ©2018-2019 Sexual Favorite Research Society of Japan.
 </template>
 
 <script>
@@ -30,7 +31,7 @@ export default {
   data () {
     return {
       drawer: false,
-      version: "0.0.3-beta",
+      version: "0.0.4-alpha",
       items: [
         {
           icon: "fas fa-home",
