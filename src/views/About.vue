@@ -5,7 +5,7 @@
         v-img.mb-3(:src="require('../assets/images/ero-iine(large).png')" contain height="10vh")
         hr
         br
-        iframe(id="inline-frame" width="500" height="500" src="../gaymax/ero.html")
+        iframe(id="inline-frame" width="500" height="500" src="https://sometrouble.github.io/ero-iine/gaymax/ero.html")
 
       v-flex.mt-5.mb-5(xs12 v-for="(content, key) in contents" :key="key")
         h2.headline.font-weight-bold.mb-3 {{ key }}
