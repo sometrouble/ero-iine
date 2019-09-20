@@ -4,9 +4,8 @@
       v-flex(xs12)
         v-img.mb-3(:src="require('../assets/images/ero-iine(large).png')" contain height="10vh")
         hr
-        .mt-4
-          blockquote.twitter-tweet
-            <p lang="ja" dir="ltr">エロいいね研究会の公式アカウントです！タイムラインを見ててこの絵エッチだな〜エロいな〜って経験はありませんか？😃<br>我々エロいいね研究会はあなたのタイムラインのエッチな絵エロい絵のさらなる発展を願うと共にお互いに新たなエロい絵を見つけるべく切磋琢磨する関係にあります！😤</p>&mdash; エロいいね研究会 (@NYLON_1919) <a href="https://twitter.com/NYLON_1919/status/981104880663150592?ref_src=twsrc%5Etfw">2018年4月3日</a></blockquote>
+        br
+        iframe(id="inline-frame" width="500" height="500" src="../gaymax/ero.html")
 
       v-flex.mt-5.mb-5(xs12 v-for="(content, key) in contents" :key="key")
         h2.headline.font-weight-bold.mb-3 {{ key }}
